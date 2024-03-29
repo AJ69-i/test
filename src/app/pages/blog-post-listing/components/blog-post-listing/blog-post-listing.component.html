@@ -1,0 +1,36 @@
+<section>
+  <div class="container text-center">
+    <p class="d-flex justify-content-center align-items-center m-auto">Our blog</p>
+    <h1>Resources and insights</h1>
+    <p>The latest industry news, interviews, technologies, and resources.</p>
+
+    <div class="input-group position-relative m-auto">
+      <svg-icon src="assets/icons/search.svg" [svgStyle]="{ 'width.px':15 }"
+        class="position-absolute top-50 translate-middle"></svg-icon>
+      <input type="text" class="form-control" aria-label="Default" placeholder="Search"
+        (keyup)="search($any($event).target.value)">
+    </div>
+  </div>
+</section>
+
+<app-error-message *ngIf="showErrorMessage" (SendRetry)="fetchAgain($event)"></app-error-message>
+
+<section class="pb-5" *ngIf="!showErrorMessage">
+  <div class="container text-center">
+    <div class="row justify-content-evenly">
+      <div class="col-" *ngFor="let post of posts; trackBy: trackByFn" (click)="navigateFullPost(post.url)">
+        <app-blog-post-item [post]="post"></app-blog-post-item>
+      </div>
+    </div>
+
+    <button type="button" *ngIf="!allPostsLoaded" class="mb-4" (click)="loadMore()">
+      <svg-icon src="assets/icons/arrow-down.svg" [svgStyle]="{ 'width.px':20 }"></svg-icon> Load more
+    </button>
+
+    <app-pagination-controls (paginatedPosts)="pagination($event)"></app-pagination-controls>
+  </div>
+</section>
+
+
+
+<app-loading-indicator></app-loading-indicator>

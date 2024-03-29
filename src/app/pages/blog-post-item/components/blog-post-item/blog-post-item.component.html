@@ -1,0 +1,24 @@
+<div class="d-flex flex-column justify-content-between h-100">
+  <div>
+    <div class="not-found" *ngIf="!post.cover_image">
+      <img lazyLoad="assets/imgs/not-found.webp" alt="not found image" class="w-100 h-100" loading="lazy">
+    </div>
+    <img lazyLoad="{{post.cover_image}}" alt="cover image" class="w-100" loading="lazy" *ngIf="post.cover_image">
+
+    <div class="body">
+      <p class="type-of">{{post.type_of}}</p>
+      <div class="d-flex justify-content-between">
+      <p class="title">{{post.title}}</p>
+      <svg-icon src="assets/icons/arrow-up-right.svg"  [svgStyle]="{ 'width.px':24 }"></svg-icon>
+      </div>
+      <p class="description">{{post.description}}</p>
+    </div>
+  </div>
+  <div class="author d-flex">
+    <img lazyLoad="{{post.user.profile_image}}" alt="author image" class="rounded-circle">
+    <div class="author-information">
+      <p class="author-name m-0">{{post.user.name}}</p>
+      <p class="published-date">{{post.published_at | date:'dd MMM yyyy'}}</p>
+    </div>
+  </div>
+</div>
